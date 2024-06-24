@@ -1,0 +1,17 @@
+
+.HeaderContainer{
+    background-color: black;
+    color: white;
+    
+
+}
+.HeaderUl{
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    align-items: center;
+    
+}
+li{
+    list-style: none;
+}

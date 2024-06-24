@@ -1,0 +1,21 @@
+.Banner{
+    background-color: black;
+    color: white;
+    width: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 800px;
+    line-height: 2;
+}
+.Banner  li:last-child{
+// margin-top: 100%;
+
+    transform: rotate(180deg); /* Rotation de 270 degrés (verticale) */
+    writing-mode: vertical-lr; /* Orientation du texte à gauche vers la droite */
+    white-space: nowrap; /* Empêche le texte de se retourner sur plusieurs lignes */
+    transform-origin: center center; /* Origine de la transformation */
+   position: relative;
+    top: 15%;
+    right: 50%;
+}
