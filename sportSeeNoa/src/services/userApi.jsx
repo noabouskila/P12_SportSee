@@ -2,11 +2,12 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
-function UserApi() {
+function UseUserApi() {
 
 
     const {id} = useParams();
     const [userData , setUserData ] = useState()
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
    
 
@@ -21,18 +22,20 @@ function UserApi() {
                     throw new Error('Erreur lors du chargement des données');
                 }
 
-                setUserData(data)
+                setUserData(data.data)
 
             }catch(error){
                 setError(error.message);
                 console.error("Erreur lors de la récupération des données : ", error);
+            } finally {
+                setLoading(false);
             }
         }
         fetchData()
     },[id])
     
 
-    return {userData , error }
+    return {userData ,loading, error }
 }
 
-export default UserApi;
+export default UseUserApi;

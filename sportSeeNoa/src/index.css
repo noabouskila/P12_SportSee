@@ -2,6 +2,11 @@
   font-family: "Roboto", sans-serif; 
 
 
+  /* assurer la largeur et hauteur minimale */
+  min-width: 1024px; 
+  min-height: 780px; 
+
+
  
 }
 

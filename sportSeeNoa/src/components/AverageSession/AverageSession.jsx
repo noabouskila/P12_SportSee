@@ -1,7 +1,6 @@
-// AverageSession.jsx
-
 import React, { useState } from 'react';
-import useAverageSessionApi from '../../services/AverageSessionApi';
+import UseAverageSessionApi from '../../services/AverageSessionApi';
+import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import  Styles from './AverageSession.module.scss'
 
@@ -20,7 +19,11 @@ const CustomTooltip = ({ active, payload }) => {
 
 
 function AverageSession() {
-    const { averageSessionData, loading, error } = useAverageSessionApi();
+
+    // gerer  switch mode dev et prod
+    const UseAverageSessionApi = UseModeProdDevApi('averageSession');
+
+    const { averageSessionData, loading, error } = UseAverageSessionApi();
 
     if (loading) {
         return <div>Loading...</div>;
@@ -34,7 +37,7 @@ function AverageSession() {
         <div>
             {averageSessionData && averageSessionData.length > 0 ? (
                 <div className={Styles.AverageSession} >
-                    <h2>Durée moyenne des sessions</h2>
+                    <p>Durée moyenne des sessions</p>
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={averageSessionData}>
                             <XAxis dataKey="day" />

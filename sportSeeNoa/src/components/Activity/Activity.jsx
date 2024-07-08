@@ -1,10 +1,16 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import useActivityApi from '../../services/ActivityApi';
+import UseActivityApi from '../../services/ActivityApi';
+import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
 import Styles from './Activity.module.scss'
 
 function Activity() {
-    const { activityData, loading, error } = useActivityApi();
+
+    // gerer  switch mode dev et prod
+    const UseActivityApi= UseModeProdDevApi('activity');
+
+    const { activityData, loading, error } = UseActivityApi();
+    
 
     if (loading) {
         return <div>Loading...</div>;
@@ -18,7 +24,7 @@ function Activity() {
         <div>
             {activityData && activityData.length > 0 ? (
                 <div className={Styles.Activity} >
-                    <h2>Activité quotidienne</h2>
+                    <p className={Styles.ActivityP} >Activité quotidienne</p>
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart
                             data={activityData}

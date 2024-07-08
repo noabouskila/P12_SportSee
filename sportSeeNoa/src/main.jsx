@@ -7,6 +7,22 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
+import Activity from './components/Activity/Activity';
+import Nutrients from './components/Nutrients/Nutrients';
+import AverageSession from './components/AverageSession/AverageSession';
+import Performance from './components/Performance/Performance';
+
+// poour repondre aux userstory 6 et 10 qui veulent que sur le chemin : path="/user/:id/activity"  apparait activity et nutrient
+const UserActivityComponents = () => {
+ 
+  return (
+      <>
+          <Activity />
+          <Nutrients />
+      </>
+  );
+};
+// ///////////////////////
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,8 +30,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
      <Router>
       <Routes>
             <Route path="/user/:id" element={<User />} />
+            <Route path="/user/:id/activity" element={<UserActivityComponents /> } />
+            <Route path="/user/:id/average-sessions" element={<AverageSession />} />
+            <Route path="/user/:id/performance" element={<Performance />} />
+            
       </Routes>
     </Router>
   </React.StrictMode>,
 )
+
 

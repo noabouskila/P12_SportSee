@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import PerformanceModel from '../models/PerformanceModel';
 
 
-function usePerformanceApi(props) {
+function UsePerformanceApi() {
 
     const {id} = useParams();
     const [performanceData , setPerformanceData ] = useState(null)
@@ -21,7 +21,7 @@ function usePerformanceApi(props) {
                 }
 
                 const data = await response.json()
-                console.log('Données reçues de l\'API :', data);  // Ajoutez ce log pour vérifier la structure des données
+                console.log('Données reçues de l\'API :', data);  
               
 
                 const model = new PerformanceModel(data.data);
@@ -43,5 +43,5 @@ function usePerformanceApi(props) {
     return { performanceData ,  loading , error}
 }
 
-export default usePerformanceApi;
+export default UsePerformanceApi;
 

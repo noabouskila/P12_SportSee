@@ -4,7 +4,10 @@ import ActivityModel from '../models/ActivityModel';
 
 
 
-function useActivityApi() {
+function UseActivityApi() {
+
+    console.log("hey je suis en prod!")
+
     const { id } = useParams();
     const [activityData, setActivityData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -36,7 +39,7 @@ function useActivityApi() {
     return { activityData, loading, error };
 }
 
-export default useActivityApi;
+export default UseActivityApi;
 
 
 

@@ -1,11 +1,17 @@
 import React from 'react';
-import usePerformanceApi from '../../services/PerformanceApi';
+import UsePerformanceApi from '../../services/PerformanceApi';
 import {
     Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer
 } from 'recharts';
+import Styles from './Performance.module.scss'
+import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
 
-function Performance(props) {
-    const { performanceData, loading, error } = usePerformanceApi();
+function Performance() {
+
+    // gerer switch mode dev et prod
+    const UsePerformanceApi = UseModeProdDevApi('performance');
+
+    const { performanceData, loading, error } = UsePerformanceApi();
 
     if (loading) {
         return <div>Loading...</div>;
@@ -19,21 +25,59 @@ function Performance(props) {
     console.log(performanceData)
     console.log('performanceData -----')
 
+    // Définir les couleurs pour chaque type de performance
+    const colors = {
+        Intensité: "#00C49F",
+        Vitesse: "#FFBB28",
+        Force: "#FF8042",
+        Endurance: "#0088FE",
+        Energie: "#FF8042",
+        Cardio: "#FFBB28",
+    };
+
+    //  réorganiser les données pour que "Intensité" soit en haut
+    const orderedKinds = ["Intensité", "Cardio", "Energie", "Endurance", "Force", "Vitesse"];
+
+    const performanceDataWithColors = performanceData
+        .map((session) => ({
+            ...session,
+            color: colors[session.kind],
+        }))
+        .sort((a, b) => orderedKinds.indexOf(a.kind) - orderedKinds.indexOf(b.kind));
+
     return (
-        <div>
-            {performanceData && performanceData.length > 0 ? (
-                <ResponsiveContainer width="100%" height={400}>
-                    <RadarChart data={performanceData}>
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="kind" />
-                        <PolarRadiusAxis />
-                        <Radar name="Performance" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-                    </RadarChart>
-                </ResponsiveContainer>
-            ) : (
-                <div>No data available</div>
-            )}
+        <div className={Styles.Performance} >
+
+            <div style={{ backgroundColor: '#2d2d2d', padding: '20px', borderRadius: '10px' }}>
+                {performanceDataWithColors && performanceDataWithColors.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={300}>
+                        <RadarChart data={performanceDataWithColors} outerRadius="80%">
+                            <PolarGrid />
+                            <PolarAngleAxis 
+                                dataKey="kind" 
+                                stroke="#ffffff"
+                                tick={{ fill: '#ffffff', fontSize: 14 }} 
+                            />
+                            {/* <PolarRadiusAxis 
+                                stroke="#ffffff"
+                                tick={{ fill: '#ffffff' }} 
+                            /> */}
+                            <Radar
+                                name="Performance"
+                                dataKey="value"
+                                stroke="#ff0101"
+                                fill="#ff0101"
+                                fillOpacity={0.6}
+                            />
+                        </RadarChart>
+                    </ResponsiveContainer>
+                ) : (
+                    <div style={{ color: '#ffffff' }}>No data available</div>
+                )}
+            </div>
+
         </div>
+       
     );
 }
 

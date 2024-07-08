@@ -1,8 +1,12 @@
 .AverageSession{
-    width: 20%;
+    width: 292px;
+    height: 307px;
     background-color: red;
-    padding: 1%;
+    padding: 6%;
     border-radius: 6px;
+}
+.AverageSession p{
+    font-size: medium;
 }
 .AverageSessionToolTip{
     background-color: blue;

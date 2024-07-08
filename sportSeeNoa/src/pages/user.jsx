@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from'./User.module.scss'
+import Styles from'./User.module.scss'
 
 import Header from '../components/Header/Header'
 import Banner from '../components/Banner/Banner'
@@ -9,53 +9,60 @@ import Activity from '../components/Activity/Activity'
 import AverageSession from '../components/AverageSession/AverageSession'
 import Performance from '../components/Performance/Performance'
 
-import UserApi from '../services/userApi'
-
+import UserApi from '../services/UserApi'
 
 function User() {
 
   const {userData , error , loading} = UserApi()
 
-  console.log(import.meta.env.VITE_IS_PROD)
+  // console.log(import.meta.env.VITE_IS_PROD) 
 
   return (
     <>
-    
-    <Header/>
-    <Banner/>
+    <div className={Styles.AppContainer} >
+      <Header/>
+      <Banner/>
 
-    {error ? (
-      <div>
-        <h1>Oups!</h1>
-        <p>Une erreur s'est produite lors de la récupération des données. Veuillez vérifier l'URL ou réessayer ultérieurement.</p>
-      </div>
-      
-      ) : userData ? (
-        <div className={styles.User} >
-
-          {/* Données generales */}
-          <h1>Bonjour <span>{userData.data.userInfos.firstName}</span></h1>
-          <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
-
-
-          {/* activity */}
-          <div>
-            <Activity/>
-            <AverageSession/>
-            <Performance/>
-            <Scores userData={userData} error={error} loading={loading}/>
-            <Nutrients userData={userData} error={error} loading={loading} />
-          </div>
-
-         
-
-
-
+      {error ? (
+        <div>
+          <h1>Oups!</h1>
+          <p>Une erreur s'est produite lors de la récupération des données. Veuillez vérifier l'URL ou réessayer ultérieurement.</p>
         </div>
-      ) : (
-        <p>Chargement des données...</p>
-    )}
+        
+        ) : userData ? (
+          <div className={Styles.User} >
 
+            {/* Données generales */}
+            <h1 className={Styles.UserH1} >Bonjour <span>{userData.userInfos.firstName}</span></h1>
+            <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+
+
+            {/* activity */}
+            <div className={Styles.UserGraphics} >
+              <Activity/>
+
+              <div  className={Styles.UserAveragePerformanceScores} >
+              <AverageSession/>
+              <Performance/>
+              <Scores userData={userData} error={error} loading={loading}/>
+
+              </div>
+            
+              <Nutrients userData={userData} error={error} loading={loading} />
+            </div>
+
+          
+
+
+
+          </div>
+        ) : (
+          <p>Chargement des données...</p>
+      )}
+
+
+    </div>
+    
     </>
   )
 }
