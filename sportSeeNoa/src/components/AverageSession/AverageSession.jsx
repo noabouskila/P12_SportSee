@@ -3,7 +3,17 @@ import UseAverageSessionApi from '../../services/AverageSessionApi';
 import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import  Styles from './AverageSession.module.scss'
+import PropTypes from 'prop-types';
 
+
+
+/**
+ * Tooltip personnalisé pour afficher les informations de chaque point de la courbe.
+ * @param {Object} props - Les propriétés du tooltip personnalisé.
+ * @param {boolean} props.active - Indique si le tooltip est actif.
+ * @param {Array} props.payload - Les données du point survolé.
+ * @returns {JSX.Element|null} Le tooltip personnalisé ou null si non actif.
+ */
 
 const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -16,6 +26,19 @@ const CustomTooltip = ({ active, payload }) => {
 
     return null;
 }
+CustomTooltip.propTypes = {
+    active: PropTypes.bool,
+    payload: PropTypes.arrayOf(PropTypes.object),
+};
+
+
+
+
+
+/**
+ * Composant AverageSession qui affiche la durée moyenne des sessions sous forme de graphique en ligne.
+ * @returns {JSX.Element} Le composant AverageSession.
+ */
 
 
 function AverageSession() {
@@ -23,6 +46,7 @@ function AverageSession() {
     // gerer  switch mode dev et prod
     const UseAverageSessionApi = UseModeProdDevApi('averageSession');
 
+     // export de donnees
     const { averageSessionData, loading, error } = UseAverageSessionApi();
 
     if (loading) {
@@ -52,5 +76,7 @@ function AverageSession() {
         </div>
     );
 }
+
+  
 
 export default AverageSession;

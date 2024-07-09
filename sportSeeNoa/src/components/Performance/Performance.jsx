@@ -1,10 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import UsePerformanceApi from '../../services/PerformanceApi';
 import {
     Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer
 } from 'recharts';
 import Styles from './Performance.module.scss'
 import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
+
+
+
+/**
+ * Composant Performance qui affiche les performances sous forme de graphique radar.
+ * Utilise l'API pour récupérer les données des performances.
+ * @returns {JSX.Element} Le composant Performance.
+ */
+
 
 function Performance() {
 
@@ -80,5 +90,9 @@ function Performance() {
        
     );
 }
+
+
+
+
 
 export default Performance;

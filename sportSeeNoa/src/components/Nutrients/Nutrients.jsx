@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import glucides from "../../assets/glucides.svg"
 import lipides from "../../assets/lipides.svg"
 import proteines from "../../assets/proteines.svg"
@@ -8,6 +9,11 @@ import Styles from './Nutrients.module.scss'
 
 import UseUserApi from '../../services/UserApi';
 import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
+
+/**
+ * Composant Nutrients qui affiche les nutriments consommés par l'utilisateur.
+ * @returns {JSX.Element} Le composant Nutrients.
+ */
 
 function Nutrients() {
 
@@ -80,6 +86,32 @@ function Nutrients() {
       </div>
     );
 }
+
+
+Nutrients.propTypes = {
+    /**
+     * Les données utilisateur contenant les nutriments consommés.
+     */
+    userData: PropTypes.shape({
+      keyData: PropTypes.shape({
+        calorieCount: PropTypes.number.isRequired,
+        proteinCount: PropTypes.number.isRequired,
+        carbohydrateCount: PropTypes.number.isRequired,
+        lipidCount: PropTypes.number.isRequired,
+      }).isRequired,
+    }),
+    /**
+     * Indique si les données sont en cours de chargement.
+     */
+    loading: PropTypes.bool.isRequired,
+    /**
+     * L'erreur survenue lors de la récupération des données.
+     */
+    error: PropTypes.shape({
+      message: PropTypes.string.isRequired,
+    }),
+  };
+
 
 export default Nutrients;
 

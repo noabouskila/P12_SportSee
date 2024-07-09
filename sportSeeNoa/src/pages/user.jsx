@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types';
 import Styles from'./User.module.scss'
 
 import Header from '../components/Header/Header'
@@ -10,6 +11,15 @@ import AverageSession from '../components/AverageSession/AverageSession'
 import Performance from '../components/Performance/Performance'
 
 import UserApi from '../services/UserApi'
+
+
+
+/**
+ * Composant User qui affiche les informations de l'utilisateur.
+ * @returns {JSX.Element} Le composant User.
+ */
+
+
 
 function User() {
 
@@ -69,4 +79,3 @@ function User() {
 
 export default User
 
-// CREE UN FICHIER MODEL QUI VA MODELISER LES DONNEE ET FAIRE LINTERMEDIAIRE ENTRE USERAPI ET USER 

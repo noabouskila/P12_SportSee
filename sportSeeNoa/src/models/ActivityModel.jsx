@@ -17,7 +17,6 @@ class ActivityModel {
 
         }));
        
-        // decomposer name kilogram et calorie  en propriete (tableau ) : faire objet session , 
     }
 }
 

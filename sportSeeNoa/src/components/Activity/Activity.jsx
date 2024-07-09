@@ -3,12 +3,21 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import UseActivityApi from '../../services/ActivityApi';
 import UseModeProdDevApi from '../../ModeProdDev/ModeProdDevApi';
 import Styles from './Activity.module.scss'
+import PropTypes from 'prop-types';
+
+
+/**
+ * Composant Activity qui affiche l'activité quotidienne de l'utilisateur sous forme de graphique à barres.
+ * @returns {JSX.Element} Le composant Activity.
+ */
+
 
 function Activity() {
 
     // gerer  switch mode dev et prod
     const UseActivityApi= UseModeProdDevApi('activity');
 
+    // recuperer les données  de rendu de l'api avec la destructuration
     const { activityData, loading, error } = UseActivityApi();
     
 
@@ -54,5 +63,28 @@ function Activity() {
         </div>
     );
 }
+
+Activity.propTypes = {
+    /**
+     * Les données d'activité de l'utilisateur.
+     */
+    activityData: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        kilogram: PropTypes.number.isRequired,
+        calories: PropTypes.number.isRequired,
+      })
+    ),
+    // /**
+    //  * Indique si les données sont en cours de chargement.
+    //  */
+    // loading: PropTypes.bool.isRequired,
+    // /**
+    //  * L'erreur survenue lors de la récupération des données.
+    //  */
+    error: PropTypes.shape({
+      message: PropTypes.string.isRequired,
+    }),
+  };
 
 export default Activity;

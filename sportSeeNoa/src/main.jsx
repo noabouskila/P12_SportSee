@@ -12,7 +12,12 @@ import Nutrients from './components/Nutrients/Nutrients';
 import AverageSession from './components/AverageSession/AverageSession';
 import Performance from './components/Performance/Performance';
 
-// poour repondre aux userstory 6 et 10 qui veulent que sur le chemin : path="/user/:id/activity"  apparait activity et nutrient
+
+/**
+ *  poour repondre aux userstory 6 et 10 qui veulent que sur le chemin : path="/user/:id/activity"  apparait activity et nutrient
+ * Composant UserActivityComponents qui affiche les composants Activity et Nutrients.
+ * @returns {JSX.Element} Les composants Activity et Nutrients.
+ */
 const UserActivityComponents = () => {
  
   return (
@@ -22,7 +27,10 @@ const UserActivityComponents = () => {
       </>
   );
 };
-// ///////////////////////
+
+/**
+ * Point d'entrée principal de l'application.
+ */
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
