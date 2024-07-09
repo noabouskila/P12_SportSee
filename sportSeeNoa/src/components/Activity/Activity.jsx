@@ -32,13 +32,19 @@ function Activity() {
                                 top: 20, right: 30, left: 20, bottom: 5,
                             }}
                         >
-                            <CartesianGrid strokeDasharray="3 3" />
+                            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
                             <XAxis dataKey="name" />
-                            <YAxis />
+                            <YAxis  orientation="right"  axisLine={false} />
                             <Tooltip />
-                            <Legend />
-                            <Bar dataKey="kilogram" fill="#8884d8" name="Poids (kg)" />
-                            <Bar dataKey="calories" fill="#82ca9d" name="Calories brûlées (kCal)" />
+                            <Legend 
+                                layout="horizontal" 
+                                align="right" 
+                                verticalAlign="top" 
+                                wrapperStyle={{ bottom:390,  right:30}}
+                                iconType="circle" 
+                            />
+                            <Bar dataKey="kilogram" fill="#000000" name="Poids (kg)"   barSize={10}  radius={[10, 10, 0, 0]}/>
+                            <Bar dataKey="calories" fill="#FF0000" name="Calories brûlées (kCal)"  barSize={10}  radius={[10, 10, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>

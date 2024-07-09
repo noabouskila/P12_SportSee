@@ -68,6 +68,7 @@ function Scores() {
                         background
                         clockWise
                         dataKey="value"
+                        cornerRadius={10}
                     />
                     <text
                         x="50%" 
